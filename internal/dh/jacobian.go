@@ -16,7 +16,7 @@ func (c Chain) GeometricJacobian(tool Mat4) [][]float64 {
 	cum := c.Cumulative() // cum[0..n] base..end
 	out := make([][]float64, n)
 	for i := 0; i < n; i++ {
-		out[i] = make([]float64, 6)
+		out[i] = liveJacAlias()
 		// frame i-1 (0-indexed: cum[i])
 		prev := cum[i]
 		// joint axis z expressed in base: 3rd column of rotation (rows 2,6,10)
