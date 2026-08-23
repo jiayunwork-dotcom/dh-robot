@@ -1,0 +1,10 @@
+{
+  "links": [
+    {"a": 1.0, "alpha": 0, "d": 0, "theta": 0, "type": "revolute"},
+    {"a": 1.0, "alpha": 0, "d": 0, "theta": 0, "type": "revolute"},
+    {"a": 1.0, "alpha": 0, "d": 0, "theta": 0, "type": "revolute"}
+  ],
+  "joints": [30, 45, -15],
+  "tcp": [],
+  "allow_negative_a": false
+}
