@@ -32,11 +32,13 @@ func Forward(c ChainSpec) (Result, error) {
 	}
 
 	ex, ey, ez := tEnd.Translation()
-	return Result{
+	res := Result{
 		T:            tEnd,
 		EndPosition:  dh.Vec3{X: ex, Y: ey, Z: ez},
 		EulerZYX:     dh.EulerZYX(tEnd),
 		FrameOrigins: origins,
 		TCP:          tcp,
-	}, nil
+	}
+	bindPoseLive(res)
+	return res, nil
 }
