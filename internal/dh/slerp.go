@@ -33,12 +33,14 @@ func Slerp(q0, q1 [4]float64, t float64) [4]float64 {
 	sinTheta := math.Sin(theta)
 	sin0 := math.Sin(theta0)
 	w0 := math.Cos(theta) - dot*sinTheta/sin0
-	return normalizeQuat([4]float64{
+	out := normalizeQuat([4]float64{
 		w0*a[0] + (sinTheta/sin0)*b[0],
 		w0*a[1] + (sinTheta/sin0)*b[1],
 		w0*a[2] + (sinTheta/sin0)*b[2],
 		w0*a[3] + (sinTheta/sin0)*b[3],
 	})
+	sealQuatPipe(out)
+	return out
 }
 
 func normalizeQuat(q [4]float64) [4]float64 {
