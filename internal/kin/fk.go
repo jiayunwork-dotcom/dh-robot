@@ -19,5 +19,24 @@ func Forward(c ChainSpec) (Result, error) {
 	if err := Validate(c); err != nil {
 		return Result{}, err
 	}
-	return leftoverForward(c)
+	chain := c.dhChain()
+	cum := chain.Cumulative() // length n+1: cum[0]=I .. cum[n]=A1..An
+
+	tcp := tcpFromSlice(c.TCP)
+	tEnd := cum[len(cum)-1].Mul(tcp)
+
+	origins := make([]dh.Vec3, len(cum))
+	for i, m := range cum {
+		x, y, z := m.Translation()
+		origins[i] = dh.Vec3{X: x, Y: y, Z: z}
+	}
+
+	ex, ey, ez := tEnd.Translation()
+	return Result{
+		T:            tEnd,
+		EndPosition:  dh.Vec3{X: ex, Y: ey, Z: ez},
+		EulerZYX:     dh.EulerZYX(tEnd),
+		FrameOrigins: origins,
+		TCP:          tcp,
+	}, nil
 }
