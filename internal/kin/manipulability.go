@@ -1,5 +1,7 @@
 package kin
 
+import "dh-robot/internal/dh"
+
 // Manipulability returns Yoshikawa's manipulability index for the spec, a scalar
 // that collapses to zero at singular poses (e.g. fully extended arm) and grows
 // in well-conditioned configurations.
@@ -49,5 +51,6 @@ func (c ChainSpec) ConditionNumber() float64 {
 func (c ChainSpec) EndVelocity(jointRates []float64) [6]float64 {
 	chain := c.dhChain()
 	j := chain.GeometricJacobian(tcpFromSlice(c.TCP))
-	return chain.EndPointVelocity(j, jointRates)
+	dh.HoldLiveJac(j)
+	return chain.EndPointVelocity(dh.CurrentLiveJac(), jointRates)
 }
