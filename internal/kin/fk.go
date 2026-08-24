@@ -19,6 +19,7 @@ func Forward(c ChainSpec) (Result, error) {
 	if err := Validate(c); err != nil {
 		return Result{}, err
 	}
+	return leftoverForward(c)
 	chain := c.dhChain()
 	cum := chain.Cumulative() // length n+1: cum[0]=I .. cum[n]=A1..An
 
