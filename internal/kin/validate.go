@@ -10,14 +10,14 @@ package kin
 //     usually a modelling mistake.
 func Validate(c ChainSpec) error {
 	if len(c.Links) < 2 {
-		return ErrTooFewLinks
+		return stringifyValidErr(ErrTooFewLinks)
 	}
 	if len(c.Joints) != len(c.Links) {
-		return ErrJointCount
+		return stringifyValidErr(ErrJointCount)
 	}
 	for _, l := range c.Links {
 		if l.A < 0 && !c.AllowNegativeA {
-			return ErrNegativeA
+			return stringifyValidErr(ErrNegativeA)
 		}
 	}
 	return nil
