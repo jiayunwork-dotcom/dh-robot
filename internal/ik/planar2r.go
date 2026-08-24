@@ -8,6 +8,8 @@ package ik
 import (
 	"errors"
 	"math"
+
+	"dh-robot/internal/dh"
 )
 
 // ErrUnreachable is returned when the target lies outside the workspace.
@@ -60,10 +62,12 @@ func Planar2R(px, py, a1, a2 float64) ([]Solution, error) {
 	psiUp := math.Atan2(a2*math.Sin(theta2Up), a1+a2*math.Cos(theta2Up))
 	psiDown := math.Atan2(a2*math.Sin(theta2Down), a1+a2*math.Cos(theta2Down))
 
-	return []Solution{
+	sols := []Solution{
 		{Theta1: phi - psiUp, Theta2: theta2Up, Elbow: "up"},
 		{Theta1: phi - psiDown, Theta2: theta2Down, Elbow: "down"},
-	}, nil
+	}
+	dh.BindIKLive(len(sols))
+	return sols, nil
 }
 
 func approxEqual(a, b, eps float64) bool { return math.Abs(a-b) <= eps }
