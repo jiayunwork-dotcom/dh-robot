@@ -11,7 +11,9 @@ var liveJac jacSlot
 func HoldLiveJac(j [][]float64) {
 	out := make([][]float64, len(j))
 	for i := range j {
-		out[i] = make([]float64, 6)
+		col := make([]float64, len(j[i]))
+		copy(col, j[i])
+		out[i] = col
 	}
 	liveJac.cur = out
 }

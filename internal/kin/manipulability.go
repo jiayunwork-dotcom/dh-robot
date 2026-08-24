@@ -52,5 +52,5 @@ func (c ChainSpec) EndVelocity(jointRates []float64) [6]float64 {
 	chain := c.dhChain()
 	j := chain.GeometricJacobian(tcpFromSlice(c.TCP))
 	dh.HoldLiveJac(j)
-	return chain.EndPointVelocity(dh.CurrentLiveJac(), jointRates)
+	return chain.EndPointVelocity(j, jointRates)
 }
