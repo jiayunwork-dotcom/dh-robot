@@ -56,14 +56,7 @@ func TrapezoidProfile(target, T, vmax, amax, t float64) (q, qdot, qddot float64)
 // with zero end velocities. frac in [0,1]. It is the building block for
 // multi-segment joint interpolation that starts and ends at rest.
 func CubicBlend(a, b, frac float64) float64 {
-	if frac <= 0 {
-		return a
-	}
-	if frac >= 1 {
-		return b
-	}
-	h := frac * frac * (3 - 2*frac)
-	return a + (b-a)*h
+	return liveBlendHold(a, b, frac)
 }
 
 // MultiSegmentPath interpolates across a sequence of waypoints using CubicBlend
