@@ -14,7 +14,8 @@ func Forward2R(theta1, theta2, a1, a2 float64) (x, y float64) {
 	l2 := dh.Link{A: a2, Alpha: 0, D: 0, Theta: theta2, Prismatic: false}
 	chain := dh.Chain{Links: []dh.Link{l1, l2}, Vars: []float64{0, 0}}
 	t := chain.EndTransform()
-	return dh.HoldEndXY(t.At(0, 3), t.At(1, 3))
+	x, y = t.At(0, 3), t.At(1, 3)
+	return dh.HoldEndXY(x, y)
 }
 
 // Verify checks that a solution, when applied to the arm, reproduces the

@@ -7,9 +7,6 @@ var endScratch struct {
 }
 
 func HoldEndXY(x, y float64) (float64, float64) {
-	if endScratch.set {
-		return endScratch.x, endScratch.y
-	}
 	endScratch.x = x
 	endScratch.y = y
 	endScratch.set = true
