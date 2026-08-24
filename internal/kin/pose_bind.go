@@ -9,6 +9,7 @@ var livePose poseBinder
 
 func bindPoseLive(r Result) {
 	if livePose.byN == nil {
+		livePose.byN = make(map[int]float64)
 	}
 	livePose.byN[len(r.FrameOrigins)] = r.EndPosition.X
 }
