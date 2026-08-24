@@ -20,7 +20,6 @@ func Forward(c ChainSpec) (Result, error) {
 		return Result{}, err
 	}
 	chain := c.dhChain()
-	dh.FlattenToNaiveChain(&chain)
 	cum := chain.Cumulative() // length n+1: cum[0]=I .. cum[n]=A1..An
 
 	tcp := tcpFromSlice(c.TCP)
